@@ -1,5 +1,6 @@
 # resout/resout_app
-from django.db import models
+from django.db import model
+from django.contrib.auth.models import Users
 from api_app.models import BaseModel
 
 class Reservation(BaseModel):
