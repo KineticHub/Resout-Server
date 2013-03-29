@@ -6,7 +6,7 @@ from resout_app.models import Reservation
 
 class ReservationSiteAdministrators(BaseModel):
 	reservation = models.ForeignKey(Reservation)
-	user = models.OneToOneField(User)
+	res_site_admin = models.OneToOneField(User, related_name='res_site_admin')
 	is_ReservationAdmin = models.BooleanField(default=False)
 	is_CampAdmin = models.BooleanField(default=False)
 

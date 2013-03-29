@@ -109,6 +109,7 @@ TEMPLATE_DIRS = (
 )
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
+GRAPPELLI_ADMIN_TITLE = 'ResOutreach'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -120,6 +121,8 @@ INSTALLED_APPS = (
     'resout_app',
     'reservations_app',
     'camps_app',
+    'grappelli',
+    'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

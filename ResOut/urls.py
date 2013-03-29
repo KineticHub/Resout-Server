@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'ResOut.views.home', name='home'),
     # url(r'^ResOut/', include('ResOut.foo.urls')),
 
+    (r'^grappelli/', include('grappelli.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
