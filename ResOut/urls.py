@@ -15,7 +15,7 @@ urlpatterns = patterns('ResOut',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('ApiApp.views',
+urlpatterns += patterns('api_app.views',
 
 	#url(r'^api/token/$', 'EmptyTokenCall'),
 
@@ -31,6 +31,6 @@ urlpatterns += patterns('ApiApp.views',
 )
 
 urlpatterns += patterns('',
-    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/admin/'}),
+    #(r'^$', 'django.views.generic.simple.redirect_to', {'url': '/admin/'}),
     (r'^grappelli/', include('grappelli.urls')),
 )
