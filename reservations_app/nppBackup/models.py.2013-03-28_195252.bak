@@ -1,26 +1,15 @@
 #resout/reservations_app
 from django.db import models
-from django.contrib.auth.models import User
 from api_app.models import BaseModel
-from resout_app.models import Reservation
 
-class ReservationSiteAdministrators(BaseModel):
-	reservation = models.ForeignKey(Reservation)
-	user = models.OneToOneField(User)
-	is_ReservationAdmin = models.BooleanField(default=False)
-	is_CampAdmin = models.BooleanField(default=False)
-
-class ReservationCamp(BaseModel):
-
-	reservation = models.ForeignKey(Reservation)
+class Camp(BaseModel):
 	name = models.CharField(max_length=255)
 	
 	def __unicode__(self):
 		return self.name
 		
-class ReservationDocumentType(BaseModel):
+class DocumentType(BaseModel):
 
-	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
 		
 	def __unicode__(self):
@@ -29,15 +18,13 @@ class ReservationDocumentType(BaseModel):
 	class Meta:
 		ordering = ['name']
 		
-class ReservationDocument(BaseModel):
+class Document(BaseModel):
         
 	DOC_FORMATS = (('IMAGE', 'IMAGE'), ('PDF','PDF'))
-	
-	
-	reservation = models.ForeignKey(Reservation)
+        
 	name = models.CharField(max_length=255)
 	link = models.URLField()
-	type = models.ForeignKey(ReservationDocumentType)
+	type = models.ForeignKey(DocumentType)
 	format = models.CharField(max_length=255, choices=DOC_FORMATS)
 	
 	def __unicode__(self):
@@ -46,9 +33,7 @@ class ReservationDocument(BaseModel):
 	class Meta:
 		ordering = ['name']
 	
-class ReservationContact(BaseModel):
-
-	reservation = models.ForeignKey(Reservation)
+class Contact(BaseModel):
 	name = models.CharField(max_length=255)
 	number = models.CharField(max_length=15, blank = True)
 	email = models.EmailField(blank = True)

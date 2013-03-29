@@ -11,5 +11,5 @@ class Reservation(BaseModel):
 	image = models.URLField(blank=True)
 	facebook_id = models.CharField(max_length=255, blank=True, null=True)
 	#foursquare_id = models.CharField(max_length=255, blank=True, null=True)
-	latitude = models.FloatField(blank=True, null=True)
-	longitude = models.FloatField(blank=True, null=True)
+	latitude = models.FloatField(editable=False)
+	longitude = models.FloatField(editable=False)

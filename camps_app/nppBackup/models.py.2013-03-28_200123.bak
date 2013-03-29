@@ -1,14 +1,14 @@
 # resout/camps_app
 from django.db import models
 from api_app.models import BaseModel
-from reservations_app.models import ReservationCamp
-#from merit_badges.models import MeritBadge
+from goshen_app.models import Camp, Document, DocumentType
+from merit_badges.models import MeritBadge
 
 class CampDocument(BaseModel):
 
 	DOC_FORMATS = (('IMAGE', 'IMAGE'), ('PDF','PDF'))
         
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey(Camp)
 	name = models.CharField(max_length=255)
 	link = models.URLField()
 	type = models.ForeignKey('CampDocumentType')
@@ -22,7 +22,6 @@ class CampDocument(BaseModel):
 		
 class CampDocumentType(BaseModel):
 
-	camp = models.ForeignKey(ReservationCamp)
 	name = models.CharField(max_length=255)
 		
 	def __unicode__(self):
@@ -32,7 +31,7 @@ class CampDocumentType(BaseModel):
 		ordering = ['name']
 
 class CampContact(BaseModel):
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey(Camp)
 	name = models.CharField(max_length=255)
 	number = models.CharField(max_length=15, blank = True)
 	email = models.EmailField(blank = True)
@@ -45,9 +44,9 @@ class CampContact(BaseModel):
 		ordering = ['camp__name', 'name']
 		
 class CampArea(BaseModel):
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey(Camp)
 	name = models.CharField(max_length=255)
-	image = models.URLField(blank = True)
+	icon = models.URLField(blank = True)
 	schedule = models.ForeignKey(CampDocument, blank=True, null=True)
 	description = models.CharField(max_length=255, blank = True)
 
@@ -58,7 +57,7 @@ class CampArea(BaseModel):
 		ordering = ['camp__name', 'name']
 
 class CampRank(BaseModel):
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey(Camp)
 	name = models.CharField(max_length=255)
 	order = models.IntegerField()
 
@@ -69,7 +68,7 @@ class CampRank(BaseModel):
 		ordering = ['camp__name', 'order', 'name']
 
 class CampStaff(BaseModel):
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey(Camp)
 	name = models.CharField(max_length=255)
 	area = models.ForeignKey(CampArea)
 	rank = models.ForeignKey(CampRank)
@@ -81,13 +80,13 @@ class CampStaff(BaseModel):
 	class Meta:
 		ordering = ['camp__name', 'name']
 		
-# class CampMeritBadge(BaseModel):
-	# camp = models.ForeignKey(Camp)
-	# badge = models.ForeignKey(MeritBadge)
-	# area = models.ForeignKey(CampArea)
+class CampMeritBadge(BaseModel):
+	camp = models.ForeignKey(Camp)
+	badge = models.ForeignKey(MeritBadge)
+	area = models.ForeignKey(CampArea)
 		
-	# def __unicode__(self):
-		# return self.camp.name + " " + self.badge.name
+	def __unicode__(self):
+		return self.camp.name + " " + self.badge.name
 		
-	# class Meta:
-		# ordering = ['camp__name', 'badge__name']
+	class Meta:
+		ordering = ['camp__name', 'badge__name']
