@@ -6,7 +6,7 @@ from api_app.models import BaseModel
 
 class Reservation(models.Model):
 	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
-	reservation_director = models.OneToOneField(ReservationAdminUser)
+	reservation_director = models.OneToOneField('ReservationAdminUser')
 	name = models.CharField(max_length=255)
 	contact_email = models.EmailField(max_length=255, blank=True)
 	contact_number = models.PositiveIntegerField(blank=True, null=True)
