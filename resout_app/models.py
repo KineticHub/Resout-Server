@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from api_app.models import BaseModel
-from reservations_app.models import  ReservationCamp
+#from reservations_app.models import  ReservationCamp
 
 class Reservation(models.Model):
 	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
@@ -20,6 +20,6 @@ class Reservation(models.Model):
 class ReservationAdminUser(AbstractUser):
 	is_reservation_admin = models.BooleanField(default=False)
 	
-class CampAdminUser(AbstractUser):
-	camp = models.ForeignKey(ReservationCamp)
-	is_camp_admin = models.BooleanField(default=False) 
+# class CampAdminUser(AbstractUser):
+	# camp = models.ForeignKey(ReservationCamp)
+	# is_camp_admin = models.BooleanField(default=False) 
