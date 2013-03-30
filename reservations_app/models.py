@@ -9,6 +9,7 @@ class ReservationSiteAdministrator(BaseModel):
 	res_site_admin = models.OneToOneField(User, related_name='res_site_admin')
 	is_ReservationAdmin = models.BooleanField(default=False)
 	is_CampAdmin = models.BooleanField(default=False) 
+	test = models.CharField(max_length=255)
 
 class ReservationCamp(BaseModel):
 
