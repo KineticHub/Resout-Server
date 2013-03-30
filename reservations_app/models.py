@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from api_app.models import BaseModel
 from resout_app.models import Reservation
 
-class ReservationSiteAdministrators(BaseModel):
+class ReservationSiteAdministrator(BaseModel):
 	reservation = models.ForeignKey(Reservation)
 	res_site_admin = models.OneToOneField(User, related_name='res_site_admin')
 	is_ReservationAdmin = models.BooleanField(default=False)
-	is_CampAdmin = models.BooleanField(default=False)
+	is_CampAdmin = models.BooleanField(default=False) 
 
 class ReservationCamp(BaseModel):
 
