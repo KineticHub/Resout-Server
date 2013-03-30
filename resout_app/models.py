@@ -1,10 +1,19 @@
 # resout/resout_app
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from api_app.models import BaseModel
+from reservations_app.models import  ReservationCamp
 
-class Reservation(BaseModel):
-	reservation_director = models.ForeignKey(User, related_name='reservation_director')
+class ReservationAdminUser(AbstractUser):
+	is_reservation_admin = models.BooleanField(default=False)
+	
+class CampAdminUser(AbstractUser):
+	camp = models.ForeignKey(ReservationCamp)
+	is_camp_admin = models.BooleanField(default=False) 
+
+class Reservation(models.Model):
+	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
+	reservation_director = models.OneToOneField(ReservationAdminUser)
 	name = models.CharField(max_length=255)
 	contact_email = models.EmailField(max_length=255, blank=True)
 	contact_number = models.PositiveIntegerField(blank=True, null=True)
