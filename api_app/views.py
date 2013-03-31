@@ -63,6 +63,6 @@ def CampRanks(request, camp_id):
     response_data = CampRank.objects.filter(camp=camp_id)
     return SerializeResponse(response_data)
 
-def CampStaff(request, camp_id):
+def CampStaffs(request, camp_id):
     response_data = CampStaff.objects.filter(camp=camp_id)
     return SerializeResponse(response_data)
