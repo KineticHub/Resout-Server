@@ -14,6 +14,8 @@ class ReservationCamp(BaseModel):
 
 	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
+	image = models.URLField()
+	description = models.CharField()
 	
 	def __unicode__(self):
 		return self.name
