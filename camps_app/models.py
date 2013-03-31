@@ -49,7 +49,7 @@ class CampArea(BaseModel):
 	name = models.CharField(max_length=255)
 	image = models.URLField(blank = True)
 	schedule = models.ForeignKey(CampDocument, blank=True, null=True)
-	description = models.CharField(max_length=255, blank = True)
+	description = models.TextField(blank=True)
 
 	def __unicode__(self):
 		return self.camp.name + " " + self.name
