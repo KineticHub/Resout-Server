@@ -6,17 +6,31 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from meritbadges_app.models import *
 
+class SubRequirement_Lvl2Form(ModelForm):
+
+	class Meta:
+		model = SubRequirement_Lvl2
+		
+class SubRequirement_Lvl2Inline(admin.StackedInline):
+	model =  SubRequirement_Lvl2
+	extra = 0
+	form = SubRequirement_Lvl2Form
+
 class SubRequirement_Lvl1Form(ModelForm):
 	#def __init__(self, *args, **kwargs):
 		#super(DrinkOrderedForm, self).__init__(*args, **kwargs)
 		#self.fields['drink_name'] = forms.ModelChoiceField(queryset=Drink.objects.all())
+		
+	inlines = [
+					SubRequirement_Lvl2Inline,
+					]
 
 	class Meta:
 		model = SubRequirement_Lvl1
 
 class SubRequirement_Lvl1Inline(admin.StackedInline):
 	model =  SubRequirement_Lvl1
-	extra = 1
+	extra = 0
 	form = SubRequirement_Lvl1Form
 
 class RequirementModelAdmin(admin.ModelAdmin):
@@ -28,5 +42,5 @@ class RequirementModelAdmin(admin.ModelAdmin):
 admin.site.register(MeritBadge)
 admin.site.register(Requirement, RequirementModelAdmin)
 #admin.site.register(SubRequirement_Lvl1)
-admin.site.register(SubRequirement_Lvl2)
+#admin.site.register(SubRequirement_Lvl2)
 admin.site.register(SubRequirement_Lvl3)
