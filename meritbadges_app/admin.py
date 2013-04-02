@@ -1,9 +1,32 @@
 #resout/meritbadges_app
 from django.contrib import admin
+from django.forms import ModelForm
+from django import forms
+from django.core.exceptions import ObjectDoesNotExist
+
 from meritbadges_app.models import *
 
+class SubRequirement_Lvl1Form(ModelForm):
+	#def __init__(self, *args, **kwargs):
+		#super(DrinkOrderedForm, self).__init__(*args, **kwargs)
+		#self.fields['drink_name'] = forms.ModelChoiceField(queryset=Drink.objects.all())
+
+	class Meta:
+		model = SubRequirement_Lvl1
+
+class SubRequirement_Lvl1Inline(admin.StackedInline):
+	model =  SubRequirement_Lvl1
+	extra = 1
+	form = SubRequirement_Lvl1Form
+
+class RequirementModelAdmin(admin.ModelAdmin):
+	#exclude = ('user',)
+	inlines = [
+					SubRequirement_Lvl1Inline,
+					]
+
 admin.site.register(MeritBadge)
-admin.site.register(Requirement)
-admin.site.register(SubRequirement_Lvl1)
+admin.site.register(Requirement, RequirementModelAdmin)
+#admin.site.register(SubRequirement_Lvl1)
 admin.site.register(SubRequirement_Lvl2)
 admin.site.register(SubRequirement_Lvl3)
