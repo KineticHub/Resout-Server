@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'resout_app',
     'reservations_app',
     'camps_app',
+	'meritbadges_app',
     'grappelli',
     'south',
     # Uncomment the next line to enable the admin:
