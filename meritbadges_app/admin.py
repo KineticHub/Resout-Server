@@ -3,15 +3,16 @@ from django.contrib import admin
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
+from nested_inlines.admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 
 from meritbadges_app.models import *
 
-class SubRequirement_Lvl2Form(ModelForm):
+class SubRequirement_Lvl2Form():
 
 	class Meta:
 		model = SubRequirement_Lvl2
 		
-class SubRequirement_Lvl2Inline(admin.StackedInline):
+class SubRequirement_Lvl2Inline(NestedStackedInline):
 	model =  SubRequirement_Lvl2
 	extra = 0
 	form = SubRequirement_Lvl2Form
@@ -28,12 +29,12 @@ class SubRequirement_Lvl1Form(ModelForm):
 	class Meta:
 		model = SubRequirement_Lvl1
 
-class SubRequirement_Lvl1Inline(admin.StackedInline):
+class SubRequirement_Lvl1Inline(NestedStackedInline):
 	model =  SubRequirement_Lvl1
 	extra = 0
 	form = SubRequirement_Lvl1Form
 
-class RequirementModelAdmin(admin.ModelAdmin):
+class RequirementModelAdmin(NestedModelAdmin):
 	#exclude = ('user',)
 	inlines = [
 					SubRequirement_Lvl1Inline,
