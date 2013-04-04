@@ -14,7 +14,7 @@ class SubRequirement_Lvl2Form():
 		
 class SubRequirement_Lvl2Inline(NestedStackedInline):
 	model =  SubRequirement_Lvl2
-	extra = 1
+	extra = 0
 	#form = SubRequirement_Lvl2Form
 
 class SubRequirement_Lvl1Form(ModelForm):
