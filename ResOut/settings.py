@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'camps_app',
     'meritbadges_app',
     'nested_inlines',
-    'grappelli',
+    #'grappelli',
     'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
