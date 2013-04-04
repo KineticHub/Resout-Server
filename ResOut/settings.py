@@ -118,15 +118,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'resout_app',
-    'reservations_app',
-    'camps_app',
-    'meritbadges_app',
     'nested_inlines',
     'grappelli',
     'south',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'resout_app',
+    'reservations_app',
+    'camps_app',
+    'meritbadges_app',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
