@@ -15,16 +15,14 @@ class SubRequirement_Lvl2Form():
 class SubRequirement_Lvl2Inline(NestedStackedInline):
 	model =  SubRequirement_Lvl2
 	extra = 0
-	form = SubRequirement_Lvl2Form
+	#form = SubRequirement_Lvl2Form
 
 class SubRequirement_Lvl1Form(ModelForm):
 	#def __init__(self, *args, **kwargs):
 		#super(DrinkOrderedForm, self).__init__(*args, **kwargs)
 		#self.fields['drink_name'] = forms.ModelChoiceField(queryset=Drink.objects.all())
 		
-	inlines = [
-					SubRequirement_Lvl2Inline,
-					]
+	inlines = [SubRequirement_Lvl2Inline,]
 
 	class Meta:
 		model = SubRequirement_Lvl1
@@ -32,13 +30,12 @@ class SubRequirement_Lvl1Form(ModelForm):
 class SubRequirement_Lvl1Inline(NestedStackedInline):
 	model =  SubRequirement_Lvl1
 	extra = 0
-	form = SubRequirement_Lvl1Form
+	inlines = [SubRequirement_Lvl2Inline,]
+	#form = SubRequirement_Lvl1Form
 
 class RequirementModelAdmin(NestedModelAdmin):
 	#exclude = ('user',)
-	inlines = [
-					SubRequirement_Lvl1Inline,
-					]
+	inlines = [SubRequirement_Lvl1Inline,]
 
 admin.site.register(MeritBadge)
 admin.site.register(Requirement, RequirementModelAdmin)
