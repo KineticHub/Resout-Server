@@ -67,7 +67,7 @@ def CampRanks(request, camp_id):
 def CampStaffs(request, camp_id):
     response_data = CampStaff.objects.filter(camp=camp_id)
     response = serializers.serialize('json', response_data, indent=4, relations={'rank':{'fields':('name', 'order',)}, 'area':{'fields':('name',)}})
-    return SerializeResponse(response_data)
+    return HttpResponse(response, mimetype="application/json")
 
 def CampMeritBadges(request, camp_id):
     response_data = CampMeritBadge.objects.filter(camp=camp_id)
