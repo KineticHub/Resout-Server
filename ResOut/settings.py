@@ -108,6 +108,10 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+SERIALIZATION_MODULES = {
+    'json': 'wadofstuff.django.serializers.json'
+}
+
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 GRAPPELLI_ADMIN_TITLE = 'ResOutreach'
 
