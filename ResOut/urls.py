@@ -28,8 +28,8 @@ urlpatterns += patterns('api_app.views',
 	url(r'^api/camp/documents/(?P<camp_id>\d{1,10})/$', 'CampDocuments'),
 	url(r'^api/camp/ranks/(?P<camp_id>\d{1,10})/$', 'CampRanks'),
         url(r'^api/camp/staff/(?P<camp_id>\d{1,10})/$', 'CampStaffs'),
-
         url(r'^api/camp/badges/(?P<camp_id>\d{1,10})/$', 'CampBadges'),
+                        
         url(r'^api/badge/requirements/(?P<badge_id>\d{1,10})/$', 'RequirementsForBadge'),
 )
 

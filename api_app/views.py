@@ -68,8 +68,12 @@ def CampStaffs(request, camp_id):
     response_data = CampStaff.objects.filter(camp=camp_id)
     return SerializeResponse(response_data)
 
+def CampMeritBadges(request, camp_id):
+    response_data = CampMeritBadge.objects.filter(camp=camp_id)
+    return SerializeResponse(response_data)
+
 def RequirementsForBadge(request, badge_id):
-    merit_badge = MeritBadge.objects.get(pk=1)
+    merit_badge = MeritBadge.objects.get(pk=badge_id)
     requirements = merit_badge.requirements.all()
 
     response_data = []

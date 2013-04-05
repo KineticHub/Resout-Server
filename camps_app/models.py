@@ -81,13 +81,13 @@ class CampStaff(BaseModel):
 	class Meta:
 		ordering = ['camp__name', 'name']
 		
-# class CampMeritBadge(BaseModel):
-	# camp = models.ForeignKey(Camp)
-	# badge = models.ForeignKey(MeritBadge)
-	# area = models.ForeignKey(CampArea)
+class CampMeritBadge(BaseModel):
+	camp = models.ForeignKey(ReservationCamp)
+	badge = models.ForeignKey(MeritBadge)
+	area = models.ForeignKey(CampArea)
 		
-	# def __unicode__(self):
-		# return self.camp.name + " " + self.badge.name
+	def __unicode__(self):
+		return self.camp.name + " " + self.badge.name
 		
-	# class Meta:
-		# ordering = ['camp__name', 'badge__name']
+	class Meta:
+		ordering = ['camp__name', 'badge__name']
