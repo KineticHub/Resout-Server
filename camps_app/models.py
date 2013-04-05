@@ -2,7 +2,7 @@
 from django.db import models
 from api_app.models import BaseModel
 from reservations_app.models import ReservationCamp
-#from merit_badges.models import MeritBadge
+from meritbadges_app.models import MeritBadge
 
 class CampDocument(BaseModel):
 
