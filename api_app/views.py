@@ -70,7 +70,8 @@ def CampStaffs(request, camp_id):
 
 def CampMeritBadges(request, camp_id):
     response_data = CampMeritBadge.objects.filter(camp=camp_id)
-    return SerializeResponse(response_data)
+    response = serializers.serialize('json', response_data, indent=4, relations=('badge',))
+    return HttpResponse(response, mimetype="application/json")
 
 def RequirementsForBadge(request, badge_id):
     merit_badge = MeritBadge.objects.get(pk=badge_id)
