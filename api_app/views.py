@@ -29,6 +29,7 @@ from django.contrib.auth.models import User
 #custom imports
 from reservations_app.models import *
 from camps_app.models import *
+from meritbadges_app.models import *
 
 def SerializeResponse(response_data):
     json_serializer = serializers.get_serializer("json")()
@@ -66,3 +67,26 @@ def CampRanks(request, camp_id):
 def CampStaffs(request, camp_id):
     response_data = CampStaff.objects.filter(camp=camp_id)
     return SerializeResponse(response_data)
+
+def RequirementsForBadge(request, badge_id):
+    merit_badge = MeritBadge.objects.get(pk=1)
+    requirements = merit_badge.requirements.all()
+
+    response_data = []
+    for req in requirements:
+        subreq_lvl1s = req.subrequirements_lvl1.all()
+        model_to_dict(req)
+        req['subrequirements'] = []
+        for sublvl1 in subreq_lvl1s:
+            subreq_lvl2s = sublvl1.subrequirements_lvl2.all()
+            model_to_dict(sublvl1)
+            sublvl1['subrequirements'] = []
+            for sublvl2 in subreq_lvl2s:
+                subreq_lvl3s = sublvl2.subrequirements_lvl3.all().values()
+                model_to_dict(sublvl2)
+                sublvl2['subrequirements'] = subreq_lvl3s
+                sublvl1['subrequirements'].append(sublvl2)
+            req['subrequirements'].append(sublvl1)
+        response_data.append(req)
+
+    return HttpResponse(json.dumps(response_data), mimetype="application/json")

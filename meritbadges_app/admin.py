@@ -7,7 +7,7 @@ from nested_inlines.admin import NestedModelAdmin, NestedStackedInline, NestedTa
 
 from meritbadges_app.models import *
 
-class SubRequirement_Lvl3Inline(NestedStackedInline):
+class SubRequirement_Lvl3Inline(NestedTabularInline):
 	model =  SubRequirement_Lvl3
 	extra = 1
 	#form = SubRequirement_Lvl2Form
@@ -17,7 +17,7 @@ class SubRequirement_Lvl2Form():
 	class Meta:
 		model = SubRequirement_Lvl2
 		
-class SubRequirement_Lvl2Inline(NestedStackedInline):
+class SubRequirement_Lvl2Inline(NestedTabularInline):
 	model =  SubRequirement_Lvl2
 	extra = 1
 	inlines = [SubRequirement_Lvl3Inline,]
@@ -33,7 +33,7 @@ class SubRequirement_Lvl1Form(ModelForm):
 	class Meta:
 		model = SubRequirement_Lvl1
 
-class SubRequirement_Lvl1Inline(NestedStackedInline):
+class SubRequirement_Lvl1Inline(NestedTabularInline):
 	model =  SubRequirement_Lvl1
 	extra = 1
 	inlines = [SubRequirement_Lvl2Inline,]
