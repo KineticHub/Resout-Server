@@ -75,18 +75,18 @@ def RequirementsForBadge(request, badge_id):
     response_data = []
     for req in requirements:
         subreq_lvl1s = req.subrequirements_lvl1.all()
-        model_to_dict(req)
-        req['subrequirements'] = []
+        dic_req = model_to_dict(req)
+        dic_req['subrequirements'] = []
         for sublvl1 in subreq_lvl1s:
             subreq_lvl2s = sublvl1.subrequirements_lvl2.all()
-            model_to_dict(sublvl1)
-            sublvl1['subrequirements'] = []
+            dic_sublvl1 = model_to_dict(sublvl1)
+            dic_sublvl1['subrequirements'] = []
             for sublvl2 in subreq_lvl2s:
                 subreq_lvl3s = sublvl2.subrequirements_lvl3.all().values()
-                model_to_dict(sublvl2)
-                sublvl2['subrequirements'] = subreq_lvl3s
-                sublvl1['subrequirements'].append(sublvl2)
-            req['subrequirements'].append(sublvl1)
-        response_data.append(req)
+                dic_sublvl2 = model_to_dict(sublvl2)
+                dic_sublvl2['subrequirements'] = subreq_lvl3s
+                dic_sublvl1['subrequirements'].append(dic_sublvl2)
+            dic_req['subrequirements'].append(dic_sublvl1)
+        response_data.append(dic_req)
 
     return HttpResponse(json.dumps(response_data), mimetype="application/json")
