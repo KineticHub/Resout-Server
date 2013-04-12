@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserChangeForm
 
 class MyUserChangeForm(UserChangeForm):
 	fields =  ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2', 'is_staff')
-    class Meta(UserChangeForm.Meta):
+	class Meta(UserChangeForm.Meta):
 		model = ReservationAdminUser2
 
 class MyUserAdmin(UserAdmin):
