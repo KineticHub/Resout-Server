@@ -10,6 +10,11 @@ class MyUserChangeForm(UserChangeForm):
 		model = ReservationAdminUser2
 		#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 		
+class MyUserChangeForm2(UserChangeForm):
+	class Meta:#(UserChangeForm.Meta):
+		model = ReservationAdminUser
+		#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
+		
 
 class MyUserAdmin(UserAdmin):
 	form = MyUserChangeForm
@@ -23,6 +28,19 @@ class MyUserAdmin(UserAdmin):
 	fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')}),
 	)
+	
+class MyUserAdmin2(UserAdmin):
+	form = MyUserChangeForm2
+	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
+	#exclude = ('is_superuser',)
+
+	#fieldsets = UserAdmin.fieldsets + (
+		#(None, {'fields': ('is_reservation_admin2',)}),
+	#)
+	
+	fieldsets = (
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin')}),
+	)
 
 
 admin.site.register(ReservationAdminUser2, MyUserAdmin)
@@ -32,4 +50,4 @@ admin.site.register(ReservationAdminUser2, MyUserAdmin)
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
 admin.site.register(Reservation)
-admin.site.register(ReservationAdminUser, MyUserAdmin)
+admin.site.register(ReservationAdminUser, MyUserAdmin2)
