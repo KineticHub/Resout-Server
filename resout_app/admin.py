@@ -12,7 +12,7 @@ class MyUserChangeForm(UserChangeForm):
 
 class MyUserAdmin(UserAdmin):
 	form = MyUserChangeForm
-	#exclude = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
+	fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 
 	fieldsets = UserAdmin.fieldsets + (
 		(None, {'fields': ('is_reservation_admin2',)}),
