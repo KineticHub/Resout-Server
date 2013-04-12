@@ -32,4 +32,4 @@ admin.site.register(ReservationAdminUser2, MyUserAdmin)
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
 admin.site.register(Reservation)
-admin.site.register(ReservationAdminUser)
+admin.site.register(ReservationAdminUser, MyUserAdmin)
