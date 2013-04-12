@@ -10,12 +10,12 @@ class MyUserChangeForm(UserChangeForm):
         model = ReservationAdminUser2
 
 class MyUserAdmin(UserAdmin):
-    form = MyUserChangeForm
+	form = MyUserChangeForm
 	fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 
-    fieldsets = UserAdmin.fieldsets + (
-            (None, {'fields': ('is_reservation_admin2',)}),
-    )
+	fieldsets = UserAdmin.fieldsets + (
+		(None, {'fields': ('is_reservation_admin2',)}),
+	)
 
 
 admin.site.register(ReservationAdminUser2, MyUserAdmin)
