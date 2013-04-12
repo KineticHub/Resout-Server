@@ -24,7 +24,7 @@ class ReservationAdminUser2(User):
 	is_reservation_admin2 =  models.BooleanField(default=False)
 	
 	# Use UserManager to get the create_user method, etc.
-    objects = UserManager()
+	objects = UserManager()
 	
 # class CampAdminUser(AbstractUser):
 	# camp = models.ForeignKey(ReservationCamp)
