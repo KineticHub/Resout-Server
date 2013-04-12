@@ -1,6 +1,6 @@
 # resout/resout_app
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User, AbstractUser, UserManager
 from api_app.models import BaseModel
 #from reservations_app.models import  ReservationCamp
 
@@ -19,6 +19,12 @@ class Reservation(models.Model):
 
 class ReservationAdminUser(AbstractUser):
 	is_reservation_admin = models.BooleanField(default=False)
+	
+class ReservationAdminUser2(User):
+	is_reservation_admin2 =  models.BooleanField(default=False)
+	
+	# Use UserManager to get the create_user method, etc.
+    objects = UserManager()
 	
 # class CampAdminUser(AbstractUser):
 	# camp = models.ForeignKey(ReservationCamp)
