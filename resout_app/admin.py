@@ -36,9 +36,8 @@ class CampAdminUserAdmin(UserAdmin):
 		# return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
 		
 	def queryset(self, request):
-	
-        if request.user.is_superuser:
-            return User.objects.all()
+		if request.user.is_superuser:
+			return User.objects.all()
 			
 		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
         return ReservationAdminUser.objects.filter(reservation = res_admin.reservation)
