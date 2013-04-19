@@ -55,7 +55,7 @@ from reservations_app.models import *
 # class ReservationContactAdmin(FilterUserAdmin):
 	# exclude = ('user', 'reservation')
 
-admin.site.register(ReservationSiteAdministrator)
+#admin.site.register(ReservationSiteAdministrator)
 admin.site.register(ReservationCamp)
 admin.site.register(ReservationDocumentType)
 admin.site.register(ReservationDocument)

@@ -5,19 +5,19 @@ from resout_app.models import *
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
 
-class MyUserChangeForm(UserChangeForm):
+class CampAdminUserChangeForm(UserChangeForm):
 	class Meta:#(UserChangeForm.Meta):
-		model = ReservationAdminUser2
+		model = CampAdminUser
 		#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 		
-class MyUserChangeForm2(UserChangeForm):
+class ReservationAdminUserChangeForm(UserChangeForm):
 	class Meta:#(UserChangeForm.Meta):
 		model = ReservationAdminUser
 		#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 		
 
-class MyUserAdmin(UserAdmin):
-	form = MyUserChangeForm
+class CampAdminUserAdmin(UserAdmin):
+	form = CampAdminUserChangeForm
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
@@ -26,11 +26,11 @@ class MyUserAdmin(UserAdmin):
 	#)
 	
 	fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')}),
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'camp')}),
 	)
 	
-class MyUserAdmin2(UserAdmin):
-	form = MyUserChangeForm2
+class ReservationAdminUserAdmin(UserAdmin):
+	form = ReservationAdminUserChangeForm
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
@@ -39,7 +39,7 @@ class MyUserAdmin2(UserAdmin):
 	#)
 	
 	fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin')}),
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
 	)
 
 
@@ -50,4 +50,5 @@ admin.site.register(ReservationAdminUser2, MyUserAdmin)
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
 admin.site.register(Reservation)
-admin.site.register(ReservationAdminUser, MyUserAdmin2)
+admin.site.register(ReservationAdminUser, ReservationAdminUserAdmin)
+admin.site.register(CampAdminUser, CampAdminUserAdmin)
