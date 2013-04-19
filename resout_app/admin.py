@@ -24,6 +24,19 @@ class CampAdminUserAdmin(UserAdmin):
 	#fieldsets = UserAdmin.fieldsets + (
 		#(None, {'fields': ('is_reservation_admin2',)}),
 	#)
+
+	add_fieldsets = (
+                     (None, {
+                          'classes': ('wide',),
+                          'fields': ('username', 'email', 'password1', 'password2')}
+                          ),
+                         )
+
+	add_form = UserCreationForm
+	
+	fieldsets = (
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation', 'camp')}),
+	)
 	
 	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
@@ -35,17 +48,25 @@ class CampAdminUserAdmin(UserAdmin):
 			# self.exclude.append('reservation')
 		# return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
 		
+	def get_readonly_fields(self, request, obj=None):
+                if not request.user.is_superuser:
+                        return self.readonly_fields + ('reservation',)
+                return self.readonly_fields
+	
 	def queryset(self, request):
 		if request.user.is_superuser:
-			return User.objects.all()
-			
+			return CampAdminUser.objects.all()
 		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-		return CampAdminUserAdmin.objects.filter(reservation = res_admin.reservation)
-		
+		return CampAdminUser.objects.filter(reservation = res_admin.reservation)
+
 	def get_fieldsets(self, request, obj=None):
-		if request.user.is_superuser:
-			return super(UserAdmin, self).get_fieldsets(request, obj)
-		return self.restricted_fieldsets
+                if obj:
+                        return self.fieldsets
+                        #if request.user.is_superuser:
+                                #return self.fieldsets
+                        #return self.restricted_fieldsets
+                else:
+                        return self.add_fieldsets
 	
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
@@ -116,14 +137,14 @@ class ReservationAdminUserAdmin(UserAdmin):
 #		return super(UserAdmin, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
-		#if not request.user.is_superuser:
-			#try:
+		if not request.user.is_superuser:
+			try:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
-			#except:
-				#obj.is_active = False
-                                obj.is_staff = True
-                                obj.save()
+			except:
+				obj.is_active = False
+                obj.is_staff = True
+                obj.save()
 
 #admin.site.register(ReservationAdminUser2, MyUserAdmin)
 
