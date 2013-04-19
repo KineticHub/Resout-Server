@@ -58,13 +58,28 @@ class FilterUserAdmin(admin.ModelAdmin):
 		# return obj.user == request.user
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
-		#if db_field.name == "type" and not request.user.is_superuser:
-                                #res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-				#kwargs["queryset"] = ReservationDocumentType.objects.filter(reservation=res_admin.reservation)
-				#return db_field.formfield(**kwargs)
-		# if db_field.name == "bar" and not request.user.is_superuser:
-				# kwargs["queryset"] = VenueBar.objects.filter(user=request.user)
-				# return db_field.formfield(**kwargs)
+                res_admin = None
+                camp_admin
+                try:
+                    res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+                except:
+                    try:
+                        camp_admin = CampAdminUser.objects.get(pk=request.user.id)
+                    except:
+                        # THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDING IS GOOD
+                        pass
+            
+		if db_field.name == "camp" and not request.user.is_superuser:
+                                res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+				kwargs["queryset"] = ReservationCamp.objects.filter(reservation=res_admin.reservation)
+				return db_field.formfield(**kwargs)
+			    
+		if db_field.name == "schedule" and not request.user.is_superuser:
+                        if res_admin:
+				kwargs["queryset"] = CampDocument.objects.filter(camp__reservation=res_admin.reservation)
+			if camp_admin:
+                                kwargs["queryset"] = CampDocument.objects.filter(camp=camp_admin.camp)
+			return db_field.formfield(**kwargs)
 		# if db_field.name == "drink_type" and not request.user.is_superuser:
 				# kwargs["queryset"] = DrinkType.objects.filter(user=request.user)
 				# return db_field.formfield(**kwargs)
