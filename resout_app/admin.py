@@ -26,18 +26,22 @@ class CampAdminUserAdmin(UserAdmin):
 	#)
 	
 	fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'camp')}),
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation', 'camp')}),
 	)
 	
+	def get_form(self, request, obj=None, **kwargs):
+		self.exclude = []	
+		if not request.user.is_superuser:
+			self.exclude.append('reservation')
+		return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
+	
 	def save_model(self, request, obj, form, change):
-		
 		if not request.user.is_superuser:
 			try:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
 			except:
-				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-				obj.reservation = res_admin.reservation
+				obj.is_active = False
 		obj.is_staff = True
 		obj.save()
 	
@@ -53,16 +57,20 @@ class ReservationAdminUserAdmin(UserAdmin):
 	fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
 	)
+	
+	def get_form(self, request, obj=None, **kwargs):
+		self.exclude = []	
+		if not request.user.is_superuser:
+			self.exclude.append('reservation')
+		return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
-		
 		if not request.user.is_superuser:
 			try:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
 			except:
-				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-				obj.reservation = res_admin.reservation
+				obj.is_active = False
 		obj.is_staff = True
 		obj.save()
 
