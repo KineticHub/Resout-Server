@@ -1,6 +1,7 @@
 #resout/resout_app
 from django.contrib import admin
 from resout_app.models import *
+from reservations_app.models import *
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
@@ -47,6 +48,14 @@ class CampAdminUserAdmin(UserAdmin):
 		# if not request.user.is_superuser:
 			# self.exclude.append('reservation')
 		# return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
+		
+	def formfield_for_foreignkey(self, db_field, request, **kwargs):
+                if db_field.name == "camp" and not request.user.is_superuser:
+                        res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+                        kwargs["queryset"] = ReservationCamp.objects.filter(reservation=res_admin.reservation)
+			return db_field.formfield(**kwargs)
+		return super(CampAdminUserAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+		
 		
 	def get_readonly_fields(self, request, obj=None):
                 if not request.user.is_superuser:
