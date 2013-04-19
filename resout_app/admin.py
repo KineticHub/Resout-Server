@@ -26,7 +26,7 @@ class CampAdminUserAdmin(UserAdmin):
 	#)
 	
 	restricted_fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'camp')}),
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
 	
 	# def get_form(self, request, obj=None, **kwargs):
