@@ -94,7 +94,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 		self.exclude = []	
 		# if not request.user.is_superuser:
 			# self.exclude.append('reservation')
-		return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
+		return super(ReservationAdminUserChangeForm, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
