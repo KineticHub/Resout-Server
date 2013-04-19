@@ -30,8 +30,13 @@ class CampAdminUserAdmin(UserAdmin):
 	)
 	
 	def save_model(self, request, obj, form, change):
+		
 		if not request.user.is_superuser:
-			obj.reservation = request.user.reservation
+			try:
+				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+				obj.reservation = res_admin.reservation
+			except:
+				pass
 		obj.save()
 	
 class ReservationAdminUserAdmin(UserAdmin):
@@ -52,7 +57,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 		if not request.user.is_superuser:
 			try:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-				obj.reservation = request.user.reservation
+				obj.reservation = res_admin.reservation
 			except:
 				pass
 		obj.save()
