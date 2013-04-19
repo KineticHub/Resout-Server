@@ -43,7 +43,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	)
 
 
-admin.site.register(ReservationAdminUser2, MyUserAdmin)
+#admin.site.register(ReservationAdminUser2, MyUserAdmin)
 
 # class CustomUserAdmin(admin.ModelAdmin):
 	# list_display = ('first_name', 'last_name', 'password', 'is_reservation_admin2')
