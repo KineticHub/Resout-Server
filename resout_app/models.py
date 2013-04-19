@@ -18,13 +18,13 @@ class Reservation(models.Model):
 	longitude = models.FloatField(blank=True, null=True)
 
 class ReservationAdminUser(User):
-	reservation = models.ForeignKey(Reservation)
+	reservation = models.ForeignKey(Reservation, null=True)
 	
 	# Use UserManager to get the create_user method, etc.
 	objects = UserManager()
 
 class CampAdminUser(User):
-	camp = models.ForeignKey('reservations_app.ReservationCamp')
+	camp = models.ForeignKey('reservations_app.ReservationCamp', null=True)
 	
 	# Use UserManager to get the create_user method, etc.
 	objects = UserManager()
