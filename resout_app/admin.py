@@ -79,12 +79,6 @@ class ReservationAdminUserAdmin(UserAdmin):
 		if request.user.is_superuser:
 			return super(UserAdmin, self).get_fieldsets(request, obj)
 		return self.restricted_fieldsets
-
-	def get_form(self, request, obj=None, **kwargs):
-		"""
-		Workaround bug http://code.djangoproject.com/ticket/9360 (thanks to peritus)
-		"""
-		return super(UserAdmin, self).get_form(request, obj, fields=self.get_fieldsets(request, obj))
 	
 	# def get_fieldsets(self, request, obj=None):
 		# if request.user.is_superuser:
