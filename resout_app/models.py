@@ -30,6 +30,7 @@ class ReservationAdminUser(User):
 		verbose_name = "Reservation Admin User"
 
 class CampAdminUser(User):
+	reservation = models.ForeignKey(Reservation, null=True)
 	camp = models.ForeignKey('reservations_app.ReservationCamp', null=True)
 	
 	# Use UserManager to get the create_user method, etc.
