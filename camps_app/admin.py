@@ -59,7 +59,7 @@ class FilterUserAdmin(admin.ModelAdmin):
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
                 res_admin = None
-                camp_admin
+                camp_admin = None
                 try:
                     res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
                 except:
