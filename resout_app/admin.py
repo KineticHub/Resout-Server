@@ -40,7 +40,7 @@ class CampAdminUserAdmin(UserAdmin):
 			return User.objects.all()
 			
 		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-		return ReservationAdminUser.objects.filter(reservation = res_admin.reservation)
+		return CampAdminUserAdmin.objects.filter(reservation = res_admin.reservation)
 		
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
