@@ -84,7 +84,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 		"""
 		Workaround bug http://code.djangoproject.com/ticket/9360 (thanks to peritus)
 		"""
-		return super(UserAdmin, self).get_form(request, obj, fields=flatten_fieldsets(self.get_fieldsets(request, obj)))
+		return super(UserAdmin, self).get_form(request, obj, fields=self.get_fieldsets(request, obj))
 	
 	# def get_fieldsets(self, request, obj=None):
 		# if request.user.is_superuser:
