@@ -11,6 +11,11 @@ class FilterUserAdmin(admin.ModelAdmin):
 			obj.user
 		except:
 			obj.user = request.user
+
+		if not request.user.is_superuser:
+			try:
+			    res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+			    obj.reservation = res_admin.reservation
 				
 		obj.save()
 
