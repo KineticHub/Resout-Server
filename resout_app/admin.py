@@ -44,12 +44,17 @@ class ReservationAdminUserAdmin(UserAdmin):
 	#)
 	
 	fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
 	)
 
 	def save_model(self, request, obj, form, change):
+		
 		if not request.user.is_superuser:
-			obj.reservation = request.user.reservation
+			try:
+				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+				obj.reservation = request.user.reservation
+			except:
+				pass
 		obj.save()
 
 #admin.site.register(ReservationAdminUser2, MyUserAdmin)
