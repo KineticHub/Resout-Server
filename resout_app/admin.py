@@ -38,6 +38,7 @@ class CampAdminUserAdmin(UserAdmin):
 			except:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
+		obj.is_staff = True
 		obj.save()
 	
 class ReservationAdminUserAdmin(UserAdmin):
@@ -62,6 +63,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 			except:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
+		obj.is_staff = True
 		obj.save()
 
 #admin.site.register(ReservationAdminUser2, MyUserAdmin)
