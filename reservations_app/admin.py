@@ -12,11 +12,14 @@ class FilterUserAdmin(admin.ModelAdmin):
 		except:
 			obj.user = request.user
 
-		if not request.user.is_superuser:
-			try:
-			    res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-			    obj.reservation = res_admin.reservation
-				
+                if not request.user.is_superuser:
+                    try:
+                        res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+                        obj.reservation = res_admin.reservation
+                    except:
+                        # THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDING IS GOOD
+                        pass
+
 		obj.save()
 
 	def get_readonly_fields(self, request, obj=None):
