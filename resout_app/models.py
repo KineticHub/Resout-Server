@@ -19,13 +19,15 @@ class Reservation(models.Model):
 
 class ReservationAdminUser(User):
 	reservation = models.ForeignKey(Reservation)
+	
+	# Use UserManager to get the create_user method, etc.
+	objects = UserManager()
 
 class CampAdminUser(User):
 	camp = models.ForeignKey('reservations_app.ReservationCamp')
 	
-	
 	# Use UserManager to get the create_user method, etc.
-	#objects = UserManager()
+	objects = UserManager()
 	
 # class CampAdminUser(AbstractUser):
 	# camp = models.ForeignKey(ReservationCamp)
