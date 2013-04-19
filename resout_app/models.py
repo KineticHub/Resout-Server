@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser, UserManager
 from api_app.models import BaseModel
-from reservations_app.models import  ReservationCamp
+#from reservations_app.models import  ReservationCamp
 
 class Reservation(models.Model):
 	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
@@ -21,7 +21,7 @@ class ReservationAdminUser(User):
 	reservation = models.ForeignKey(Reservation)
 
 class CampAdminUser(User):
-	camp = models.ForeignKey(ReservationCamp)
+	camp = models.ForeignKey('reservations_app.ReservationCamp')
 	
 	
 	# Use UserManager to get the create_user method, etc.
