@@ -90,11 +90,11 @@ class ReservationAdminUserAdmin(UserAdmin):
 			# return self.fieldsets
 		# return self.restricted_fieldsets
 	
-	# def get_form(self, request, obj=None, **kwargs):
-		# self.exclude = []	
+	def get_form(self, request, obj=None, **kwargs):
+		self.exclude = []	
 		# if not request.user.is_superuser:
 			# self.exclude.append('reservation')
-		# return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
+		return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
