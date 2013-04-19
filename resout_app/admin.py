@@ -29,6 +29,11 @@ class CampAdminUserAdmin(UserAdmin):
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'camp')}),
 	)
 	
+	def save_model(self, request, obj, form, change):
+		if not request.user.is_superuser:
+			obj.reservation = request.user.reservation
+		obj.save()
+	
 class ReservationAdminUserAdmin(UserAdmin):
 	form = ReservationAdminUserChangeForm
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
@@ -42,6 +47,10 @@ class ReservationAdminUserAdmin(UserAdmin):
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
 
+	def save_model(self, request, obj, form, change):
+		if not request.user.is_superuser:
+			obj.reservation = request.user.reservation
+		obj.save()
 
 #admin.site.register(ReservationAdminUser2, MyUserAdmin)
 
