@@ -82,7 +82,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
 			return super(UserAdmin, self).get_fieldsets(request, obj)
-		return self.restricted_fieldsets
+		return self.fieldsets
 	
 	# def get_fieldsets(self, request, obj=None):
 		# if request.user.is_superuser:
@@ -111,7 +111,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	# list_display = ('first_name', 'last_name', 'password', 'is_reservation_admin2')
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
-admin.site.unregister(User)
+#admin.site.unregister(User)
 admin.site.register(Reservation)
 admin.site.register(ReservationAdminUser, ReservationAdminUserAdmin)
 admin.site.register(CampAdminUser, CampAdminUserAdmin)
