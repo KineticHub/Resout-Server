@@ -74,10 +74,11 @@ class ReservationAdminUserAdmin(UserAdmin):
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
 	
-	# def queryset(self, request):
-		# if request.user.is_superuser:
-			# return User.objects.all()
-		# return User.objects.filter(id__exact=request.user.id)
+	def queryset(self, request):
+		if request.user.is_superuser:
+			return User.objects.all()
+		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+		return ReservationAdminUser.objects.filter(reservation = res_admin.reservation)
 
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
