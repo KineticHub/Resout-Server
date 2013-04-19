@@ -16,18 +16,27 @@ class Reservation(models.Model):
 	#foursquare_id = models.CharField(max_length=255, blank=True, null=True)
 	latitude = models.FloatField(blank=True, null=True)
 	longitude = models.FloatField(blank=True, null=True)
+	
+	def __unicode__(self):
+		return self.name
 
 class ReservationAdminUser(User):
 	reservation = models.ForeignKey(Reservation, null=True)
 	
 	# Use UserManager to get the create_user method, etc.
 	objects = UserManager()
+	
+	class Meta:
+		verbose_name = "Reservation Admin User"
 
 class CampAdminUser(User):
 	camp = models.ForeignKey('reservations_app.ReservationCamp', null=True)
 	
 	# Use UserManager to get the create_user method, etc.
 	objects = UserManager()
+	
+	class Meta:
+		verbose_name = "Camp Admin User"
 	
 # class CampAdminUser(AbstractUser):
 	# camp = models.ForeignKey(ReservationCamp)
