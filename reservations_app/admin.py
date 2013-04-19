@@ -6,13 +6,13 @@ from reservations_app.models import *
 # # ===================================================#
 class FilterUserAdmin(admin.ModelAdmin):
 
-	# def save_model(self, request, obj, form, change):
-		# try:
-			# obj.user
-		# except:
-			# obj.user = request.user
+	def save_model(self, request, obj, form, change):
+		try:
+			obj.user
+		except:
+			obj.user = request.user
 				
-		# obj.save()
+		obj.save()
 
 	def get_readonly_fields(self, request, obj=None):
                 if not request.user.is_superuser:
