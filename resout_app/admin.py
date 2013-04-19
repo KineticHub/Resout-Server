@@ -25,15 +25,20 @@ class CampAdminUserAdmin(UserAdmin):
 		#(None, {'fields': ('is_reservation_admin2',)}),
 	#)
 	
-	fieldsets = (
+	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation', 'camp')}),
 	)
 	
-	def get_form(self, request, obj=None, **kwargs):
-		self.exclude = []	
-		if not request.user.is_superuser:
-			self.exclude.append('reservation')
-		return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
+	# def get_form(self, request, obj=None, **kwargs):
+		# self.exclude = []	
+		# if not request.user.is_superuser:
+			# self.exclude.append('reservation')
+		# return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
+		
+	def get_fieldsets(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(UserAdmin, self).get_fieldsets(request, obj)
+        return self.restricted_fieldsets
 	
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
@@ -54,15 +59,20 @@ class ReservationAdminUserAdmin(UserAdmin):
 		#(None, {'fields': ('is_reservation_admin2',)}),
 	#)
 	
-	fieldsets = (
-		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
+	restricted_fieldsets = (
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
 	
-	def get_form(self, request, obj=None, **kwargs):
-		self.exclude = []	
-		if not request.user.is_superuser:
-			self.exclude.append('reservation')
-		return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
+	def get_fieldsets(self, request, obj=None):
+        if request.user.is_superuser:
+            return super(UserAdmin, self).get_fieldsets(request, obj)
+        return self.restricted_fieldsets
+	
+	# def get_form(self, request, obj=None, **kwargs):
+		# self.exclude = []	
+		# if not request.user.is_superuser:
+			# self.exclude.append('reservation')
+		# return super(ReservationAdminUserAdmin, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
