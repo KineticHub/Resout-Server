@@ -62,7 +62,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
-	super_fieldsets = UserAdmin.fieldsets + (
+	fieldsets = UserAdmin.fieldsets + (
 		(None, {'fields': ('reservation',)}),
 	)
 	
@@ -72,7 +72,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
-			return self.super_fieldsets
+			return self.fieldsets
 		return self.restricted_fieldsets
 	
 	# def get_form(self, request, obj=None, **kwargs):
