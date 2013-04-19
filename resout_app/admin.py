@@ -25,7 +25,7 @@ class CampAdminUserAdmin(UserAdmin):
 		#(None, {'fields': ('is_reservation_admin2',)}),
 	#)
 	
-	fieldsets = (
+	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'camp')}),
 	)
 	
@@ -45,7 +45,7 @@ class CampAdminUserAdmin(UserAdmin):
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
 			return super(UserAdmin, self).get_fieldsets(request, obj)
-		return self.fieldsets
+		return self.restricted_fieldsets
 	
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
