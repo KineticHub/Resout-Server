@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser, UserManager
 from api_app.models import BaseModel
-#from reservations_app.models import  ReservationCamp
+from reservations_app.models import  ReservationCamp
 
 class Reservation(models.Model):
 	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
@@ -17,14 +17,15 @@ class Reservation(models.Model):
 	latitude = models.FloatField(blank=True, null=True)
 	longitude = models.FloatField(blank=True, null=True)
 
-class ReservationAdminUser(AbstractUser):
-	is_reservation_admin = models.BooleanField(default=False)
+class ReservationAdminUser(User):
+	reservation = models.ForeignKey(Reservation)
+
+class CampAdminUser(User):
+	camp = models.ForeignKey(ReservationCamp)
 	
-class ReservationAdminUser2(User):
-	is_reservation_admin2 =  models.BooleanField(default=False)
 	
 	# Use UserManager to get the create_user method, etc.
-	objects = UserManager()
+	#objects = UserManager()
 	
 # class CampAdminUser(AbstractUser):
 	# camp = models.ForeignKey(ReservationCamp)
