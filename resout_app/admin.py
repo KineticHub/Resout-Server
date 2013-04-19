@@ -62,18 +62,34 @@ class ReservationAdminUserAdmin(UserAdmin):
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
-	fieldsets = UserAdmin.fieldsets + (
-		(None, {'fields': ('reservation',)}),
-	)
+	# fieldsets = UserAdmin.fieldsets + (
+		# (None, {'fields': ('reservation',)}),
+	# )
 	
 	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
 	
+	# def queryset(self, request):
+		# if request.user.is_superuser:
+			# return User.objects.all()
+		# return User.objects.filter(id__exact=request.user.id)
+
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
-			return self.fieldsets
+			return super(UserAdmin, self).get_fieldsets(request, obj)
 		return self.restricted_fieldsets
+
+	def get_form(self, request, obj=None, **kwargs):
+		"""
+		Workaround bug http://code.djangoproject.com/ticket/9360 (thanks to peritus)
+		"""
+		return super(UserAdmin, self).get_form(request, obj, fields=flatten_fieldsets(self.get_fieldsets(request, obj)))
+	
+	# def get_fieldsets(self, request, obj=None):
+		# if request.user.is_superuser:
+			# return self.fieldsets
+		# return self.restricted_fieldsets
 	
 	# def get_form(self, request, obj=None, **kwargs):
 		# self.exclude = []	
