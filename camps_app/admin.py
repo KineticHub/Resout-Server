@@ -83,23 +83,23 @@ class FilterUserAdmin(admin.ModelAdmin):
 		    
 		if db_field.name == "type" and not request.user.is_superuser:
                         if res_admin:
-				kwargs["queryset"] = CampDocument.objects.filter(camp__reservation=res_admin.reservation)
+				kwargs["queryset"] = CampDocumentType.objects.filter(camp__reservation=res_admin.reservation)
 			if camp_admin:
-                                kwargs["queryset"] = CampDocument.objects.filter(camp=camp_admin.camp)
+                                kwargs["queryset"] = CampDocumentType.objects.filter(camp=camp_admin.camp)
 			return db_field.formfield(**kwargs)
 
 		if db_field.name == "area" and not request.user.is_superuser:
                         if res_admin:
-				kwargs["queryset"] = CampDocument.objects.filter(camp__reservation=res_admin.reservation)
+				kwargs["queryset"] = CampArea.objects.filter(camp__reservation=res_admin.reservation)
 			if camp_admin:
-                                kwargs["queryset"] = CampDocument.objects.filter(camp=camp_admin.camp)
+                                kwargs["queryset"] = CampArea.objects.filter(camp=camp_admin.camp)
 			return db_field.formfield(**kwargs)
 
 		if db_field.name == "rank" and not request.user.is_superuser:
                         if res_admin:
-				kwargs["queryset"] = CampDocument.objects.filter(camp__reservation=res_admin.reservation)
+				kwargs["queryset"] = CampRank.objects.filter(camp__reservation=res_admin.reservation)
 			if camp_admin:
-                                kwargs["queryset"] = CampDocument.objects.filter(camp=camp_admin.camp)
+                                kwargs["queryset"] = CampRank.objects.filter(camp=camp_admin.camp)
 			return db_field.formfield(**kwargs)
 		    
 		return super(FilterUserAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
