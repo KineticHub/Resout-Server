@@ -86,7 +86,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 
         def get_readonly_fields(self, request, obj=None):
                 if not request.user.is_superuser:
-                        return self.readonly_fields + ['reservation']
+                        return self.readonly_fields ('reservation',)
                 return self.readonly_fields
 	
 	def queryset(self, request):
