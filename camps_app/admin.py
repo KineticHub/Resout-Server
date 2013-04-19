@@ -39,7 +39,7 @@ class FilterUserAdmin(admin.ModelAdmin):
                     return qs
                 try:
                     res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-                    return qs.filter(camp.reservation=res_admin.reservation)
+                    return qs.filter(camp__reservation=res_admin.reservation)
                 except:
                     try:
                         camp_admin = CampAdminUser.objects.get(pk=request.user.id)
