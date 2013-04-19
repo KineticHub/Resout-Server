@@ -66,12 +66,12 @@ class ReservationAdminUserAdmin(UserAdmin):
 		# (None, {'fields': ('reservation',)}),
 	# )
 
-	#add_fieldsets = (
-                     #(None, {
-                          #'classes': ('wide',),
-                          #'fields': ('username', 'email', 'password1', 'password2')}
-                          #),
-                         #)
+	add_fieldsets = (
+                     (None, {
+                          'classes': ('wide',),
+                          'fields': ('username', 'email', 'password1', 'password2')}
+                          ),
+                         )
 
 	add_form = UserCreationForm
 	
@@ -90,9 +90,12 @@ class ReservationAdminUserAdmin(UserAdmin):
 		return ReservationAdminUser.objects.filter(reservation = res_admin.reservation)
 
 	def get_fieldsets(self, request, obj=None):
-		if request.user.is_superuser:
-			return self.fieldsets
-		return self.restricted_fieldsets
+                if obj:
+                        if request.user.is_superuser:
+                                return self.fieldsets
+                        return self.restricted_fieldsets
+                else:
+                        return self.add_fieldsets
 	
 	# def get_fieldsets(self, request, obj=None):
 		# if request.user.is_superuser:
