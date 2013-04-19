@@ -58,7 +58,8 @@ class CampAdminUserAdmin(UserAdmin):
 		obj.save()
 	
 class ReservationAdminUserAdmin(UserAdmin):
-	form = ReservationAdminUserChangeForm(initial={'reservation': 1})
+        temp_res = Reservation.objects.get(pk=1)
+	form = ReservationAdminUserChangeForm(initial={'reservation': temp_res})
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
