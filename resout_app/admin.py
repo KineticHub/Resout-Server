@@ -109,12 +109,12 @@ class ReservationAdminUserAdmin(UserAdmin):
 #		return super(UserAdmin, self).get_form(request, obj, **kwargs)
 
 	def save_model(self, request, obj, form, change):
-		if not request.user.is_superuser:
-			try:
+		#if not request.user.is_superuser:
+			#try:
 				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				obj.reservation = res_admin.reservation
-			except:
-				obj.is_active = False
+			#except:
+				#obj.is_active = False
 		obj.is_staff = True
 		obj.save()
 
