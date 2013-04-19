@@ -72,7 +72,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	
 	def get_fieldsets(self, request, obj=None):
 		if request.user.is_superuser:
-			return super(UserAdmin, self).get_fieldsets(request, obj)
+			return self.super_fieldsets
 		return self.restricted_fieldsets
 	
 	# def get_form(self, request, obj=None, **kwargs):
