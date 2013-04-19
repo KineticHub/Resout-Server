@@ -58,8 +58,8 @@ class CampAdminUserAdmin(UserAdmin):
 		obj.save()
 	
 class ReservationAdminUserAdmin(UserAdmin):
-        temp_res = Reservation.objects.get(pk=1)
-	form = ReservationAdminUserChangeForm#(initial={'reservation': temp_res})
+        
+	form = ReservationAdminUserChangeForm#(initial={'reservation': Reservation.objects.get(pk=1)})
 	#fields = ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'is_reservation_admin2')
 	#exclude = ('is_superuser',)
 
@@ -83,6 +83,11 @@ class ReservationAdminUserAdmin(UserAdmin):
 	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
+
+        def get_readonly_fields(self, request, obj=None):
+                if not request.user.is_superuser:
+                        return self.readonly_fields + ['reservation']
+                return self.readonly_fields
 	
 	def queryset(self, request):
 		if request.user.is_superuser:
@@ -92,9 +97,10 @@ class ReservationAdminUserAdmin(UserAdmin):
 
 	def get_fieldsets(self, request, obj=None):
                 if obj:
-                        if request.user.is_superuser:
-                                return self.fieldsets
-                        return self.restricted_fieldsets
+                        return self.fieldsets
+                        #if request.user.is_superuser:
+                                #return self.fieldsets
+                        #return self.restricted_fieldsets
                 else:
                         return self.add_fieldsets
 	
