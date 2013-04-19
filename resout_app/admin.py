@@ -84,6 +84,14 @@ class CampAdminUserAdmin(UserAdmin):
 				obj.reservation = res_admin.reservation
 			except:
 				obj.is_active = False
+		try:
+                        group = Group.objects.get(name='Camp Admins')
+                except Group.DoesNotExist:
+                        # group should exist, but this is just for safety's sake, it case the improbable should happen
+                        pass
+                else:
+                        obj.groups.add(group)
+                        
 		obj.is_staff = True
 		obj.save()
 	
@@ -152,6 +160,15 @@ class ReservationAdminUserAdmin(UserAdmin):
 				obj.reservation = res_admin.reservation
 			except:
 				obj.is_active = False
+
+		try:
+                        group = Group.objects.get(name='Reservation Admins')
+                except Group.DoesNotExist:
+                        # group should exist, but this is just for safety's sake, it case the improbable should happen
+                        pass
+                else:
+                        obj.groups.add(group)
+                
                 obj.is_staff = True
                 obj.save()
 
