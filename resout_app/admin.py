@@ -36,9 +36,9 @@ class CampAdminUserAdmin(UserAdmin):
 		# return super(CampAdminUserAdmin, self).get_form(request, obj, **kwargs)
 		
 	def get_fieldsets(self, request, obj=None):
-        if request.user.is_superuser:
-            return super(UserAdmin, self).get_fieldsets(request, obj)
-        return self.restricted_fieldsets
+		if request.user.is_superuser:
+			return super(UserAdmin, self).get_fieldsets(request, obj)
+		return self.restricted_fieldsets
 	
 	def save_model(self, request, obj, form, change):
 		if not request.user.is_superuser:
@@ -64,9 +64,9 @@ class ReservationAdminUserAdmin(UserAdmin):
 	)
 	
 	def get_fieldsets(self, request, obj=None):
-        if request.user.is_superuser:
-            return super(UserAdmin, self).get_fieldsets(request, obj)
-        return self.restricted_fieldsets
+		if request.user.is_superuser:
+			return super(UserAdmin, self).get_fieldsets(request, obj)
+		return self.restricted_fieldsets
 	
 	# def get_form(self, request, obj=None, **kwargs):
 		# self.exclude = []	
