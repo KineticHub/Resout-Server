@@ -66,12 +66,14 @@ class ReservationAdminUserAdmin(UserAdmin):
 		# (None, {'fields': ('reservation',)}),
 	# )
 
-	add_fieldsets = (
-                     (None, {
-                          'classes': ('wide',),
-                          'fields': ('username', 'email', 'password1', 'password2')}
-                          ),
-                         )
+	#add_fieldsets = (
+                     #(None, {
+                          #'classes': ('wide',),
+                          #'fields': ('username', 'email', 'password1', 'password2')}
+                          #),
+                         #)
+
+	add_form = UserCreationForm
 	
 	fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
@@ -119,7 +121,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	# list_display = ('first_name', 'last_name', 'password', 'is_reservation_admin2')
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
-#admin.site.unregister(User)
+admin.site.unregister(User)
 admin.site.register(Reservation)
 admin.site.register(ReservationAdminUser, ReservationAdminUserAdmin)
 admin.site.register(CampAdminUser, CampAdminUserAdmin)
