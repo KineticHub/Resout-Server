@@ -76,7 +76,7 @@ class ReservationAdminUserAdmin(UserAdmin):
 	
 	def queryset(self, request):
 		if request.user.is_superuser:
-			return User.objects.all()
+			return ReservationAdminUser.objects.all()
 		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 		return ReservationAdminUser.objects.filter(reservation = res_admin.reservation)
 
