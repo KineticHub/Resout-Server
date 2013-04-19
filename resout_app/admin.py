@@ -65,8 +65,8 @@ class ReservationAdminUserAdmin(UserAdmin):
 	# fieldsets = UserAdmin.fieldsets + (
 		# (None, {'fields': ('reservation',)}),
 	# )
-    
-    add_fieldsets = (
+
+	add_fieldsets = (
                      (None, {
                           'classes': ('wide',),
                           'fields': ('username', 'email', 'password1', 'password2')}
