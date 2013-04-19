@@ -115,8 +115,8 @@ class ReservationAdminUserAdmin(UserAdmin):
 				obj.reservation = res_admin.reservation
 			#except:
 				#obj.is_active = False
-		obj.is_staff = True
-		obj.save()
+                                obj.is_staff = True
+                                obj.save()
 
 #admin.site.register(ReservationAdminUser2, MyUserAdmin)
 
