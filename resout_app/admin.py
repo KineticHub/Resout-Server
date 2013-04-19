@@ -66,6 +66,10 @@ class ReservationAdminUserAdmin(UserAdmin):
 		# (None, {'fields': ('reservation',)}),
 	# )
 	
+	fieldsets = (
+		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active', 'reservation')}),
+	)
+	
 	restricted_fieldsets = (
 		(None, {'fields': ('username', 'password', 'first_name', 'last_name', 'email', 'is_active')}),
 	)
