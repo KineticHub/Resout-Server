@@ -5,6 +5,7 @@ from reservations_app.models import *
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.models import Group
 
 class CampAdminUserChangeForm(UserChangeForm):
 	class Meta:#(UserChangeForm.Meta):
