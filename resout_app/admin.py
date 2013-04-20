@@ -14,7 +14,7 @@ class ReservationAdmin(admin.ModelAdmin):
 		if request.user.is_superuser:
                         return qs
                 res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-		return qs.filter(pk=res_admin.reservation)
+		return qs.filter(pk=res_admin.reservation.id)
 
 class CampAdminUserChangeForm(UserChangeForm):
 	class Meta:#(UserChangeForm.Meta):
