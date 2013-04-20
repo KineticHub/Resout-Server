@@ -7,6 +7,15 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.models import Group
 
+class ReservationAdmin(admin.ModelAdmin):
+	
+	def queryset(self, request):
+		qs = super(ReservationAdmin, self).queryset(request)
+		if request.user.is_superuser:
+                        return qs
+                res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+		return qs.filter(pk=res_admin.reservation)
+
 class CampAdminUserChangeForm(UserChangeForm):
 	class Meta:#(UserChangeForm.Meta):
 		model = CampAdminUser
@@ -178,6 +187,6 @@ class ReservationAdminUserAdmin(UserAdmin):
 # admin.site.register(ReservationAdminUser2, CustomUserAdmin)
 
 admin.site.unregister(User)
-admin.site.register(Reservation)
+admin.site.register(Reservation, ReservationAdmin)
 admin.site.register(ReservationAdminUser, ReservationAdminUserAdmin)
 admin.site.register(CampAdminUser, CampAdminUserAdmin)
