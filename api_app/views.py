@@ -36,6 +36,10 @@ def SerializeResponse(response_data):
     response = json_serializer.serialize(response_data, ensure_ascii=False)
     return HttpResponse(response, mimetype="application/json")
 
+def ReservationInfo(request, res_id):
+    response_data = Reservation.objects.get(pk=res_id)
+    return SerializeResponse(response_data)
+    
 def ReservationCamps(request, res_id):
     response_data = ReservationCamp.objects.filter(reservation=res_id)
     return SerializeResponse(response_data)

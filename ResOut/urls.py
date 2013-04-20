@@ -19,6 +19,7 @@ urlpatterns += patterns('api_app.views',
 
 	#url(r'^api/token/$', 'EmptyTokenCall'),
 
+        url(r'^api/reservation/(?P<res_id>\d{1,10})/$', 'ReservationInfo'),
 	url(r'^api/reservation/camps/(?P<res_id>\d{1,10})/$', 'ReservationCamps'),
 	url(r'^api/reservation/documents/(?P<res_id>\d{1,10})/$', 'ReservationDocuments'),
 	url(r'^api/reservation/contacts/(?P<res_id>\d{1,10})/$', 'ReservationContacts'),
