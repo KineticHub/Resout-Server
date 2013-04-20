@@ -1,6 +1,6 @@
 # resout/resout_app
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser, UserManager
+from django.contrib.auth.models import User, UserManager
 from api_app.models import BaseModel
 #from reservations_app.models import  ReservationCamp
 
