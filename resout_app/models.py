@@ -24,7 +24,7 @@ class Reservation(models.Model):
 		return self.name
 		
 	def save(self, *args, **kwargs):
-                if not self.pk or self.latitude == 0 or self.longitude == 0:
+				if not self.pk or not self.latitude or not self.longitude:
                         self.set_coords()
                 super(Reservation, self).save(*args, **kwargs)
 
