@@ -52,9 +52,10 @@ class ReservationContact(BaseModel):
 
 	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
+	position = models.CharField(max_length=255)
 	number = models.CharField(max_length=15, blank = True)
 	email = models.EmailField(blank = True)
-	position = models.CharField(max_length=255)
+	thumbnail = models.URLField(blank=True)
 
 	def __unicode__(self):
 		return self.name
