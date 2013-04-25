@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User, UserManager
 from api_app.models import BaseModel
 #from reservations_app.models import  ReservationCamp
+from geopy import geocoders
 
 class Reservation(models.Model):
 	#reservation_director = models.ForeignKey(User, related_name='reservation_director')
@@ -21,6 +22,21 @@ class Reservation(models.Model):
 	
 	def __unicode__(self):
 		return self.name
+		
+	def save(self, *args, **kwargs):
+                if not self.pk or self.latitude == 0 or self.longitude == 0:
+                        self.set_coords()
+                super(Reservation, self).save(*args, **kwargs)
+
+        # set coordinates
+        def set_coords(self):
+            toFind = self.address
+            g = geocoders.GoogleV3()
+
+            place, (lat, lng) = g.geocode(toFind)
+
+            self.latitude = lat
+            self.longitude = lng
 
 class ReservationAdminUser(User):
 	reservation = models.ForeignKey(Reservation, null=True)
