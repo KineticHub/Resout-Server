@@ -12,13 +12,13 @@ class FilterUserAdmin(admin.ModelAdmin):
 		except:
 			obj.user = request.user
 
-                if not request.user.is_superuser:
-                    try:
-                        res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
-                        obj.reservation = res_admin.reservation
-                    except:
-                        # THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDING IS GOOD
-                        pass
+			if not request.user.is_superuser:
+				try:
+					res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+					obj.reservation = res_admin.reservation
+				except:
+					# THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDING IS GOOD
+					pass
 
 		obj.save()
 
@@ -61,6 +61,22 @@ class FilterUserAdmin(admin.ModelAdmin):
 
 class ReservationCampAdmin(FilterUserAdmin):
 	exclude = ('user',)
+	
+	def queryset(self, request): 
+		qs = super(FilterUserAdmin, self).queryset(request)
+		if request.user.is_superuser:
+                    return qs
+		if not request.user.is_superuser:
+                    try:
+                        res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+						return qs.filter(reservation=res_admin.reservation)
+                    except:
+                        try:
+                            camp_admin = CampAdminUser.objects.get(pk=request.user.id)
+							return qs.get(pk=camp_admin.camp.pk)
+                        except:
+                            # THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDLING IS GOOD
+                            pass
 	
 class ReservationDocumentTypeAdmin(FilterUserAdmin):
 	exclude = ('user',)
