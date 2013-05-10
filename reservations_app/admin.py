@@ -31,7 +31,7 @@ class FilterUserAdmin(admin.ModelAdmin):
 		qs = super(FilterUserAdmin, self).queryset(request)
 		if request.user.is_superuser:
 					return qs
-				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+		res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 		return qs.filter(reservation=res_admin.reservation)
 
 	# def has_change_permission(self, request, obj=None):
@@ -44,7 +44,7 @@ class FilterUserAdmin(admin.ModelAdmin):
 
 	def formfield_for_foreignkey(self, db_field, request, **kwargs):
 		if db_field.name == "type" and not request.user.is_superuser:
-								res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
+				res_admin = ReservationAdminUser.objects.get(pk=request.user.id)
 				kwargs["queryset"] = ReservationDocumentType.objects.filter(reservation=res_admin.reservation)
 				return db_field.formfield(**kwargs)
 		# if db_field.name == "bar" and not request.user.is_superuser:
