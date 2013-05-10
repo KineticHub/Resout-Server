@@ -73,7 +73,7 @@ class ReservationCampAdmin(FilterUserAdmin):
 					except:
 						try:
 							camp_admin = CampAdminUser.objects.get(pk=request.user.id)
-							return qs.get(pk=camp_admin.camp.pk)
+							return qs.filter(pk=camp_admin.camp.pk)
 						except:
 							# THIS SHOULD NOT HAPPEN, BUT SMOOTH HANDLING IS GOOD
 							pass
