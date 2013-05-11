@@ -14,7 +14,7 @@ class ReservationCamp(BaseModel):
 
 	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
-	image = models.URLField(blank=True)
+	image = models.URLField(blank=True, help_text="Please provide a URL for the image.")
 	description = models.TextField(blank=True)
 	
 	def __unicode__(self):
@@ -38,7 +38,7 @@ class ReservationDocument(BaseModel):
 	
 	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
-	link = models.URLField()
+	link = models.URLField(help_text="Please provide a URL for the document.")
 	type = models.ForeignKey(ReservationDocumentType)
 	format = models.CharField(max_length=255, choices=DOC_FORMATS)
 	
@@ -53,9 +53,9 @@ class ReservationContact(BaseModel):
 	reservation = models.ForeignKey(Reservation)
 	name = models.CharField(max_length=255)
 	position = models.CharField(max_length=255)
-	number = models.CharField(max_length=15, blank = True)
+	number = models.CharField(max_length=15, blank = True, help_text="Please use digits only, i.e. 8881112222.")
 	email = models.EmailField(blank = True)
-	thumbnail = models.URLField(blank=True)
+	thumbnail = models.URLField(blank=True, help_text="Please provide a URL for the image.")
 
 	def __unicode__(self):
 		return self.name

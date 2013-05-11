@@ -10,7 +10,7 @@ class CampDocument(BaseModel):
         
 	camp = models.ForeignKey(ReservationCamp)
 	name = models.CharField(max_length=255)
-	link = models.URLField()
+	link = models.URLField(help_text="Please provide a URL for the document.")
 	type = models.ForeignKey('CampDocumentType')
 	format = models.CharField(max_length=255, choices=DOC_FORMATS)
 	
@@ -34,7 +34,7 @@ class CampDocumentType(BaseModel):
 class CampContact(BaseModel):
 	camp = models.ForeignKey(ReservationCamp)
 	name = models.CharField(max_length=255)
-	number = models.CharField(max_length=15, blank = True)
+	number = models.CharField(max_length=15, blank = True, help_text="Please use digits only, i.e. 8881112222.")
 	email = models.EmailField(blank = True)
 	position = models.CharField(max_length=255)
 
@@ -47,7 +47,7 @@ class CampContact(BaseModel):
 class CampArea(BaseModel):
 	camp = models.ForeignKey(ReservationCamp)
 	name = models.CharField(max_length=255)
-	image = models.URLField(blank = True)
+	image = models.URLField(blank = True, help_text="Please provide a URL for the image.")
 	schedule = models.ForeignKey(CampDocument, blank=True, null=True)
 	description = models.TextField(blank=True)
 
@@ -60,7 +60,7 @@ class CampArea(BaseModel):
 class CampRank(BaseModel):
 	camp = models.ForeignKey(ReservationCamp)
 	name = models.CharField(max_length=255)
-	order = models.IntegerField()
+	order = models.IntegerField(help_text="A number representing the rank hierarchy, with lower numbers being higher in rank.")
 
 	def __unicode__(self):
 		return self.camp.name + " " + self.name
@@ -73,7 +73,7 @@ class CampStaff(BaseModel):
 	name = models.CharField(max_length=255)
 	area = models.ForeignKey(CampArea)
 	rank = models.ForeignKey(CampRank)
-	thumbnail = models.URLField(blank = True)
+	thumbnail = models.URLField(blank = True, help_text="Please provide a URL for the image.")
 
 	def __unicode__(self):
 		return self.camp.name + " " + self.name
