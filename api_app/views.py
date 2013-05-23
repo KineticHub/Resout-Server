@@ -33,7 +33,7 @@ from meritbadges_app.models import *
 
 def SerializeResponse(response_data):
     json_serializer = serializers.get_serializer("json")()
-    response = json_serializer.serialize(response_data, ensure_ascii=False)
+    response = json_serializer.serialize(response_data)
     return HttpResponse(response, mimetype="application/json")
 
 def ReservationInfo(request, res_id):
